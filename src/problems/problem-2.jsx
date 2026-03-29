@@ -17,7 +17,8 @@ function PuzzlePiece({ piece }) {
   // Student Note: 
   // Returns a square PuzzlePiece with the corresponding background color and label in the center of the piece.
   return (
-    <div className="inline-flex items-center justify-center w-20 h-20 rounded-lg text-white font-bold shadow" style={{ backgroundColor: piece.color }}>
+    <div className="inline-flex items-center justify-center w-20 h-20 rounded-lg text-white font-bold shadow"
+      style={{ backgroundColor: piece.color }}>
       <h1>{piece.label}</h1>
     </div>
   );

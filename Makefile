@@ -1,4 +1,4 @@
-STUDENT ?= Your_Name_Here
+STUDENT ?= Connor Savory
 COURSE := CSE3340-SPR-26
 ZIP_NAME := $(STUDENT)_$(COURSE).zip
 

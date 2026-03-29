@@ -13,10 +13,13 @@ const COLORS = ["#f97316", "#22c55e", "#3b82f6", "#eab308"]; // orange, green, b
 
 function Problem1() {
   const pieceIds = [0, 1, 2, 3];
+  // Acts as default values for label and color.
+  const defaults = { label: "Unknown", color: "#eee" };
 
   // TODO: Create `pieces` — an array of objects with id, label, and color. Use pieceIds.map((id) => ({ ... })) and COLORS[id].
-  const pieces = [];
-
+  // Student Note: I used the spread operator to provide default values for label and color.
+  // Then I used the map() function to map each color and label to an id value.
+  const pieces = pieceIds.map(((id) => ({ ...defaults, id: id, label: 'Piece ' + id, color: COLORS[id] })));
   return (
     <section className="problem-view p-6">
       <h2 className="text-xl font-semibold mb-2">Problem 1: ..., &#123;&#125;, and array methods</h2>
@@ -26,7 +29,7 @@ function Problem1() {
 
       {/* TODO: Render a <ul> with one <li> per piece. Use pieces.map((piece) => <li key={piece.id}>...</li>). Show piece.label; optionally use style={{ color: piece.color }}. */}
       <ul className="list-disc list-inside space-y-1">
-        {/* ... */}
+        {pieces.map((piece) => <li key={piece.id} style={{ color: piece.color }}>{piece.label}</li>)}
       </ul>
     </section>
   );

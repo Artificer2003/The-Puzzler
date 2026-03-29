@@ -19,7 +19,7 @@ function Problem1() {
   // TODO: Create `pieces` — an array of objects with id, label, and color. Use pieceIds.map((id) => ({ ... })) and COLORS[id].
   // Student Note: I used the spread operator to provide default values for label and color.
   // Then I used the map() function to map each color and label to an id value.
-  const pieces = pieceIds.map(((id) => ({ ...defaults, id: id, label: 'Piece ' + id, color: COLORS[id] })));
+  const pieces = pieceIds.map(((id) => ({ ...defaults, id: id, label: 'Piece ' + (id + 1), color: COLORS[id] })));
   return (
     <section className="problem-view p-6">
       <h2 className="text-xl font-semibold mb-2">Problem 1: ..., &#123;&#125;, and array methods</h2>

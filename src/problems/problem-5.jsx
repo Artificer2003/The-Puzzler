@@ -16,6 +16,7 @@ import { PUZZLE_PIECES_P3 } from "../config.jsx";
 const PIECES_DATA = PUZZLE_PIECES_P3;
 
 // TODO: Add draggable and onDragStart to the div. In onDragStart: e.dataTransfer.setData("text/plain", String(piece.id)); e.dataTransfer.effectAllowed = "move". Add cursor-grab and active:cursor-grabbing to className.
+/* Sets up the 'Puzzle Piece' and its interactivity.*/
 function PuzzlePiece({ piece }) {
   const handleDragStart = (e) => {
     e.dataTransfer.setData("text/plain", String(piece.id))
@@ -38,6 +39,7 @@ function Problem5() {
   const [slotIds, setSlotIds] = useState([0, 1, 2, 3]);
 
   // TODO: handleDragOver: e.preventDefault(); e.dataTransfer.dropEffect = "move";
+  /* Handles the drag movement. */
   const handleDragOver = (e) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
@@ -47,6 +49,7 @@ function Problem5() {
   // get pieceId from e.dataTransfer.getData("text/plain"); 
   // find fromIndex = slotIds.indexOf(pieceId); 
   // copy slotIds, swap next[fromIndex] and next[toIndex], then setSlotIds(next).
+  /* Handles the dropping of the piece onto a slot. */
   const handleDrop = (e, toIndex) => {
     e.preventDefault();
     const pieceId = Number(e.dataTransfer.getData("text/plain"));

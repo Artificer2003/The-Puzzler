@@ -106,7 +106,34 @@ function Problem6() {
   // 5. Otherwise, update slotIds using setSlotIds so that:
   //    - If the piece was off-grid, put it into that slot (and optionally clear any piece that was there).
   //    - If the piece was already on-grid, swap it with whatever is in the target slot.
-  const handleDropOnBoard = (e) => {};
+  const handleDropOnBoard = (e) => {
+    /* Gets the pieceId and its fromIndex if it was on-grid. */
+    const pieceId = Number(e.dataTransfer.getData("text/plain"));
+    const fromIndex = slotIds.indexOf(pieceId)
+    /* Acquires the distances from the piece and all of the slots */
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const distances = SLOT_CENTERS.map((el) => Math.sqrt(Math.pow(el.left - x, 2) + Math.pow(el.top - y, 2)));
+    /* Finds the target slot by finding the slot with the shortest distance to the piece. */
+    const min_distance = Math.min(...distances);
+    const toIndex = distances.indexOf(min_distance);
+    /* If the min_distance is less than the MAGNET_RADIUS... */
+    if (min_distance <= MAGNET_RADIUS) {
+      const next = [...slotIds];
+      /* If there is a fromIndex, swap the two pieces' slots. */
+      if (fromIndex !== -1) {
+        next[fromIndex] = slotIds[toIndex];
+        next[toIndex] = pieceId;
+      }
+      /* If there is no fromIndex, then just place the piece into the slot. */
+      else {
+        next[toIndex] = pieceId;
+      }
+      /* Apply the changes by setting the new slotIds from 'next'. */
+      setSlotIds(next);
+    }
+  };
 
   return (
     <section className="problem-view p-6">

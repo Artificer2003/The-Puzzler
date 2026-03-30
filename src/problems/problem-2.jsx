@@ -29,7 +29,7 @@ function Problem2() {
   const defaults = { label: "Unknown", color: "#eee" };
   // TODO: Build `pieces` array — same as Problem 1: [0,1,2,3].map((id) => ({ id, label: `${id + 1}`, color: COLORS[id] })).
   // Student Note: pieces array for puzzle pieces.
-  const pieces = [0, 1, 2, 3].map(((id) => ({ ...defaults, id: id, label: 'Piece ' + (id + 1), color: COLORS[id] })));
+  const pieces = [0, 1, 2, 3].map(((id) => ({ ...defaults, id: id, label: (id + 1), color: COLORS[id] })));
 
   return (
     <section className="problem-view p-6">

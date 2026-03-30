@@ -17,10 +17,16 @@ const PIECES_DATA = PUZZLE_PIECES_P3;
 
 // TODO: Add draggable and onDragStart to the div. In onDragStart: e.dataTransfer.setData("text/plain", String(piece.id)); e.dataTransfer.effectAllowed = "move". Add cursor-grab and active:cursor-grabbing to className.
 function PuzzlePiece({ piece }) {
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData("text/plain", String(piece.id))
+    e.dataTransfer.effectAllowed = "move"
+  }
   return (
     <div
-      className="inline-flex items-center justify-center w-20 h-20 rounded-lg text-white font-bold shadow"
+      className="inline-flex items-center justify-center w-20 h-20 rounded-lg text-white font-bold shadow cursor-grab active:cursor-grabbing"
       style={{ backgroundColor: piece.color }}
+      draggable={true}
+      onDragStart={handleDragStart}
     >
       {piece.label}
     </div>
@@ -32,10 +38,24 @@ function Problem5() {
   const [slotIds, setSlotIds] = useState([0, 1, 2, 3]);
 
   // TODO: handleDragOver: e.preventDefault(); e.dataTransfer.dropEffect = "move";
-  const handleDragOver = (e) => {};
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  };
 
-  // TODO: handleDrop(e, toIndex): e.preventDefault(); get pieceId from e.dataTransfer.getData("text/plain"); find fromIndex = slotIds.indexOf(pieceId); copy slotIds, swap next[fromIndex] and next[toIndex], then setSlotIds(next).
-  const handleDrop = (e, toIndex) => {};
+  // TODO: handleDrop(e, toIndex): e.preventDefault(); 
+  // get pieceId from e.dataTransfer.getData("text/plain"); 
+  // find fromIndex = slotIds.indexOf(pieceId); 
+  // copy slotIds, swap next[fromIndex] and next[toIndex], then setSlotIds(next).
+  const handleDrop = (e, toIndex) => {
+    e.preventDefault();
+    const pieceId = Number(e.dataTransfer.getData("text/plain"));
+    const fromIndex = slotIds.indexOf(pieceId);
+    const next = [...slotIds];
+    next[toIndex] = slotIds[fromIndex];
+    next[fromIndex] = slotIds[toIndex];
+    setSlotIds(next);
+  };
 
   const piecesInSlots = slotIds.map((id) => PIECES_DATA.find((p) => p.id === id));
 
